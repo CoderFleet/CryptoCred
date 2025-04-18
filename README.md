@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛡️ CryptoCred
 
-## Getting Started
+**A blockchain-based academic certificate storage and verification platform**  
+No more fakes. No more middlemen. Just trustless, verifiable credentials.
 
-First, run the development server:
+![Banner](https://dummyimage.com/1000x300/1f1f1f/ffffff&text=CryptoCred+%F0%9F%9B%A1%EF%B8%8F+Academic+Cert+on+Chain)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 What is CryptoCred?
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+CryptoCred is a decentralized platform where:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 🎓 **Students** can upload academic certificates, stored on IPFS, hashed and anchored on the blockchain.
+- 🏫 **Institutions** can issue verified certificates directly to wallets.
+- 💼 **Recruiters** can verify the authenticity of certificates without relying on third parties.
 
-## Learn More
+All this happens securely on-chain, powered by NFTs and IPFS magic. ✨
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚙️ Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Layer        | Tech                                 |
+|--------------|--------------------------------------|
+| Frontend     | React (Vite), TailwindCSS, ShadCN UI |
+| Wallet       | Wagmi + RainbowKit                   |
+| Animations   | Framer Motion                        |
+| Backend      | Node.js, Express                     |
+| Blockchain   | Solidity, Hardhat, Polygon Mumbai    |
+| Smart Contract | ERC-721 (Custom) + OpenZeppelin    |
+| Storage      | NFT.storage (IPFS)                   |
+| Auth (opt)   | Firebase or Supabase (email+wallet)  |
+| Hashing      | SHA-256 (Node & Browser Crypto API)  |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧭 User Flows
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 👨‍🎓 Student
+
+- Connect Wallet
+- Upload PDF Certificate
+- Backend hashes file, uploads to IPFS, stores hash on-chain
+- View and share verifiable public profile
+
+### 🏫 Institution
+
+- Register (pre-approved or admin-set)
+- Upload student batch or individual certs
+- Sign and issue via smart contract
+
+### 🧑‍💼 Recruiter
+
+- Visit student profile link
+- View uploaded certificates
+- Verify hash + IPFS integrity via on-chain data
+
+---
+
+## 🛠️ How It Works
+
+1. **Hashing** – File is hashed with SHA-256.
+2. **IPFS Upload** – File is uploaded to NFT.storage.
+3. **Smart Contract** – Stores metadata: IPFS hash, file hash, timestamp.
+4. **Verification** – Recruiters download cert, hash it, and compare with on-chain hash.  
+   ✅ Match = legit  
+   ❌ Mismatch = tampered
+
+---
+
+## 📦 Smart Contract Sample
+
+```solidity
+struct Certificate {
+  string ipfsHash;
+  string certHash;
+  uint timestamp;
+}
+
+mapping(address => Certificate[]) public userCerts;
+
+function issueCertificate(address user, string memory ipfsHash, string memory certHash) public onlyInstitute {
+  userCerts[user].push(Certificate(ipfsHash, certHash, block.timestamp));
+}

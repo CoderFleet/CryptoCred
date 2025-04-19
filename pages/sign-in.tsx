@@ -58,8 +58,8 @@ export default function LoginPage() {
   return (
     <AuthLayout>
       <Tabs defaultValue="email" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-6">
-          <TabsTrigger value="email">Email</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 mb-6 bg-gray-200/60 backdrop-blur border border-gray-300/40 rounded-xl shadow-sm">
+          <TabsTrigger className="data-[state=active]:bg-white/60 data-[state=active]:font-semibold rounded-xl transition-all" value="email">Email</TabsTrigger>
           <TabsTrigger value="wallet">Wallet</TabsTrigger>
         </TabsList>
         
@@ -99,7 +99,7 @@ export default function LoginPage() {
               </Alert>
             )}
             
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full" variant="gradient" disabled={isLoading}>
               {isLoading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
@@ -126,7 +126,8 @@ export default function LoginPage() {
             
             <Button 
               onClick={handleWalletConnect} 
-              className="w-full gap-2"
+              className="w-full gap-2" 
+              variant="gradient"
               disabled={isLoading}
             >
               <Wallet className="w-4 h-4" />
@@ -138,9 +139,9 @@ export default function LoginPage() {
       
       <div className="mt-6">
         <Separator className="my-4" />
-        <p className="text-center text-sm text-muted-foreground">
+        <p className="text-center text-sm text-white dark:text-white">
           Don&apos;t have an account?{" "}
-          <Link href="/sign-up" className="text-primary hover:underline">
+          <Link href="/sign-up" className="bg-gradient-to-r from-[#A7C7E7] via-[#B9F6CA] to-white bg-clip-text text-transparent font-semibold hover:underline dark:from-white dark:via-[#A7C7E7] dark:to-[#B9F6CA]">
             Create one
           </Link>
         </p>

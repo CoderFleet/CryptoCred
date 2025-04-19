@@ -64,9 +64,9 @@ const Home: React.FC = () => {
         <nav className="flex justify-between items-center px-8 py-5 bg-white/10 backdrop-blur-lg border-b border-[#635985]/30 rounded-b-2xl shadow-lg mx-4 mt-4" style={{boxShadow:'0 8px 32px 0 rgba(31, 38, 135, 0.37)'}}>
           <div className="text-2xl font-bold tracking-tight bg-gradient-to-r from-[#FFD700] via-[#FFB800] to-[#FFEF8E] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(255,215,0,0.22)]">CryptoCred</div>
           <div className="space-x-6 flex items-center">
-             <a href="#features" className="text-white font-medium hover:underline">Features</a>
+             <a href="/features" className="text-white font-medium hover:underline">Features</a>
              <a href="#roles" className="text-white font-medium hover:underline">How It Works</a>
-             <a href="#contact" className="text-white font-medium hover:underline">Contact</a>
+             <a href="/contact" className="text-white font-medium hover:underline">Contact</a>
              <a href="/sign-in" className="text-white font-medium hover:underline">Sign In</a>
            </div>
         </nav>
@@ -75,7 +75,7 @@ const Home: React.FC = () => {
   <div ref={heroRef} className="relative bg-black/95 backdrop-blur-2xl rounded-[2.5rem] shadow-[0_8px_40px_0_rgba(0,209,255,0.10)] px-12 py-16 mb-14 max-w-2xl w-full border-4 border-[#111] bg-clip-padding flex flex-col items-center before:absolute before:inset-0 before:rounded-[2.5rem] before:pointer-events-none before:bg-gradient-to-br before:from-white/10 before:to-transparent before:opacity-30 after:absolute after:inset-0 after:rounded-[2.5rem] after:pointer-events-none after:bg-gradient-to-t after:from-white/10 after:to-transparent after:opacity-50" style={{boxShadow:'0 8px 40px 0 rgba(0,209,255,0.10), 0 1.5px 32px 0 rgba(255,45,122,0.08)'}}>
     <h1 className="text-5xl md:text-6xl font-extrabold mb-4 tracking-wide font-mono bg-gradient-to-r from-[#FFD700] via-[#FFB800] to-[#FFEF8E] text-transparent bg-clip-text drop-shadow-[0_0_18px_rgba(255,215,0,0.36)]" style={{letterSpacing: '0.045em'}}>CryptoCred</h1>
     <p className="text-lg md:text-2xl text-[#e0e0ff] mb-8 font-light tracking-wider" style={{textShadow:'0 1px 8px #000'}}>Decentralized Academic Certificate Storage &amp; Verification</p>
-    <a href="#get-started" className="inline-block px-10 py-3 rounded-2xl font-bold text-lg text-white shadow-xl relative bg-gradient-to-r from-[#000] to-[#111] border-2 border-[#00d1ff] transition-all duration-300 hover:from-[#111] hover:to-[#000] hover:shadow-[0_0_32px_6px_#00d1ff,0_0_24px_4px_#00ffae,0_0_16px_2px_#ff2d7a] before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-r before:from-[#00d1ff]/30 before:via-[#00ffae]/30 before:to-[#ff2d7a]/40 before:blur before:opacity-80 before:animate-pulse overflow-hidden transition-all duration-300">Get Started</a>
+    <a href="file-upload" className="inline-block px-10 py-3 rounded-2xl font-bold text-lg text-white shadow-xl relative bg-gradient-to-r from-[#000] to-[#111] border-2 border-[#00d1ff] transition-all duration-300 hover:from-[#111] hover:to-[#000] hover:shadow-[0_0_32px_6px_#00d1ff,0_0_24px_4px_#00ffae,0_0_16px_2px_#ff2d7a] before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-r before:from-[#00d1ff]/30 before:via-[#00ffae]/30 before:to-[#ff2d7a]/40 before:blur before:opacity-80 before:animate-pulse overflow-hidden transition-all duration-300">Get Started</a>
   </div>
   {/* Three glassy cards below */}
   <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-6xl mx-auto mt-16 mb-10">

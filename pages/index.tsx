@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ShieldCheck } from 'lucide-react';
 
 const Home: React.FC = () => {
   // GSAP refs
@@ -61,19 +62,26 @@ const Home: React.FC = () => {
       return <circle key={i} cx={Math.random()*1440} cy={Math.random()*900} r={Math.random()*3+2} fill={colors[i%3]} opacity="0.13" />
     })}
   </svg>
-        <nav className="flex justify-between items-center px-8 py-5 bg-white/10 backdrop-blur-lg border-b border-[#635985]/30 rounded-b-2xl shadow-lg mx-4 mt-4" style={{boxShadow:'0 8px 32px 0 rgba(31, 38, 135, 0.37)'}}>
-          <div className="text-2xl font-bold tracking-tight bg-gradient-to-r from-[#FFD700] via-[#FFB800] to-[#FFEF8E] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(255,215,0,0.22)]">CryptoCred</div>
-          <div className="space-x-6 flex items-center">
-             <a href="/features" className="text-white font-medium hover:underline">Features</a>
-             <a href="#how-it-works" className="text-white font-medium hover:underline" onClick={e => {
-               e.preventDefault();
-               const el = document.getElementById('how-it-works');
-               if (el) el.scrollIntoView({ behavior: 'smooth' });
-             }}>How It Works</a>
-             <a href="/contact" className="text-white font-medium hover:underline">Contact</a>
-             <a href="/sign-in" className="text-white font-medium hover:underline">Sign In</a>
-           </div>
-        </nav>
+        <nav className="flex justify-between items-center px-8 py-5 bg-gradient-to-r from-[#0a0a0a] via-[#181818] to-[#0a0a0a] border-b border-[#A7C7E7]/30 rounded-b-2xl shadow-lg mx-4 mt-4 backdrop-blur-lg" style={{boxShadow:'0 8px 32px 0 rgba(31, 38, 135, 0.37)'}}>
+  <div className="flex items-center gap-2">
+    <span className="inline-flex items-center gap-2">
+      <span className="text-2xl md:text-3xl font-extrabold tracking-wide font-mono bg-gradient-to-r from-[#A7C7E7] via-[#B9F6CA] to-[#6A8CAF] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(167,199,231,0.18)]">CryptoCred</span>
+      <span className="inline-flex items-center justify-center rounded-full bg-gradient-to-br from-[#A7C7E7] via-[#B9F6CA] to-white p-1 shadow border border-[#A7C7E7] ml-1">
+        <ShieldCheck className="w-6 h-6 text-black/70" />
+      </span>
+    </span>
+  </div>
+  <div className="space-x-6 flex items-center">
+    <a href="/features" className="text-[#A7C7E7] hover:text-[#B9F6CA] font-medium transition-colors">Features</a>
+    <a href="#how-it-works" className="text-[#A7C7E7] hover:text-[#B9F6CA] font-medium transition-colors" onClick={e => {
+      e.preventDefault();
+      const el = document.getElementById('how-it-works');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }}>How It Works</a>
+    <a href="/contact" className="text-[#A7C7E7] hover:text-[#B9F6CA] font-medium transition-colors">Contact</a>
+    <a href="/sign-in" className="text-[#A7C7E7] hover:text-[#B9F6CA] font-medium transition-colors">Sign In</a>
+  </div>
+</nav>
         <section className="flex-1 flex flex-col items-center justify-center text-center px-4 py-28 md:py-36">
   {/* Central glassy card */}
   <div ref={heroRef} className="relative bg-black/95 backdrop-blur-2xl rounded-[2.5rem] shadow-[0_8px_40px_0_rgba(0,209,255,0.10)] px-12 py-16 mb-14 max-w-2xl w-full border-4 border-[#111] bg-clip-padding flex flex-col items-center before:absolute before:inset-0 before:rounded-[2.5rem] before:pointer-events-none before:bg-gradient-to-br before:from-white/10 before:to-transparent before:opacity-30 after:absolute after:inset-0 after:rounded-[2.5rem] after:pointer-events-none after:bg-gradient-to-t after:from-white/10 after:to-transparent after:opacity-50" style={{boxShadow:'0 8px 40px 0 rgba(0,209,255,0.10), 0 1.5px 32px 0 rgba(255,45,122,0.08)'}}>
@@ -112,11 +120,11 @@ const Home: React.FC = () => {
 
         {/* How It Works Section */}
         <section className="flex flex-col items-center justify-center px-4 py-20">
-  <h2 id="how-it-works" className="text-3xl md:text-4xl font-bold mb-16 bg-gradient-to-r from-[#FFD700] via-[#FFB800] to-[#FFEF8E] text-transparent bg-clip-text drop-shadow-[0_0_12px_rgba(255,215,0,0.24)]">How It Works</h2>
+  <h2 id="how-it-works" className="text-3xl md:text-4xl font-bold mb-16 bg-gradient-to-r from-[#A7C7E7] via-[#B9F6CA] to-[#6A8CAF] text-transparent bg-clip-text drop-shadow-[0_0_12px_rgba(167,199,231,0.18)]">How It Works</h2>
   <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto relative">
     {/* Timeline connector */}
     <div className="hidden md:block absolute top-1/2 left-0 right-0 h-2 z-0" style={{transform: 'translateY(-50%)'}}>
-      <div className="w-full h-full bg-gradient-to-r from-[#FFD700]/60 via-[#00d1ff]/40 to-[#ff2d7a]/60 rounded-full blur-[2px]" />
+      <div className="w-full h-full bg-gradient-to-r from-[#A7C7E7]/60 via-[#B9F6CA]/40 to-[#6A8CAF]/60 rounded-full blur-[2px]" />
     </div>
     {[
       {
@@ -138,21 +146,22 @@ const Home: React.FC = () => {
       <div
         key={step.title}
         ref={el => { howItWorksRef.current[i] = el!; }}
-        className="relative z-10 flex flex-col items-center text-center mx-0 md:mx-8 mb-16 md:mb-0 w-full md:w-auto"
+        className="relative z-10 flex flex-col items-center text-center mx-0 md:mx-8 mb-16 md:mb-0 w-full md:w-auto group transition-transform duration-300 hover:scale-105"
       >
         <div className="flex flex-col items-center">
           {/* Glowing icon circle */}
-          <div className="w-20 h-20 rounded-full flex items-center justify-center mb-4 bg-black/90 border-4 border-[#FFD700] shadow-[0_0_24px_4px_#FFD700,0_0_12px_2px_#00d1ff]">
-            <span className="text-4xl" style={{filter:'drop-shadow(0 0 10px #FFD70088)'}}>{step.icon}</span>
+          <div className="w-20 h-20 rounded-full flex items-center justify-center mb-4 bg-gradient-to-br from-[#A7C7E7] via-[#B9F6CA] to-[#6A8CAF] border-4 border-[#A7C7E7] shadow-[0_0_24px_4px_#A7C7E7,0_0_12px_2px_#B9F6CA] transition-all duration-300 hover:border-[#FFD700] hover:shadow-[0_0_20px_4px_#FFD70066]">
+            <span className="text-4xl transition-none" style={{filter:'drop-shadow(0 0 10px #A7C7E788)'}}>{step.icon}</span>
           </div>
           {/* Step number */}
-          <div className="text-lg font-bold mb-1 bg-gradient-to-r from-[#FFD700] via-[#FFB800] to-[#FFEF8E] text-transparent bg-clip-text">Step {i+1}</div>
+          <div className="text-lg font-bold mb-1 bg-gradient-to-r from-[#A7C7E7] via-[#B9F6CA] to-[#6A8CAF] text-transparent bg-clip-text">Step {i+1}</div>
           {/* Step title */}
           <div className="text-xl md:text-2xl font-bold text-white mb-2 tracking-wide font-mono">{step.title}</div>
           {/* Step desc */}
           <div className="text-base md:text-lg font-light text-[#e0e0e0] max-w-xs">{step.desc}</div>
         </div>
         {/* Connector line for mobile */}
+        {i < 2 && <div className="block md:hidden w-1 h-14 mx-auto bg-gradient-to-b from-[#A7C7E7]/60 via-[#B9F6CA]/40 to-[#6A8CAF]/60 rounded-full my-4" />}
         {i < 2 && <div className="block md:hidden w-1 h-14 mx-auto bg-gradient-to-b from-[#FFD700]/60 via-[#00d1ff]/40 to-[#ff2d7a]/60 rounded-full my-4" />}
       </div>
     ))}

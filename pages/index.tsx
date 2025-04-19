@@ -155,9 +155,6 @@ const Home: React.FC = () => {
   </div>
 </section>
 
-         <footer className="py-8 bg-white/10 backdrop-blur-lg border-t border-[#635985]/30 text-center mt-8 rounded-t-2xl shadow-lg mx-4 mb-4" id="contact" style={{boxShadow:'0 -8px 32px 0 rgba(31, 38, 135, 0.27)'}}>
-           <div className="text-white font-semibold"> 2023 CryptoCred. All rights reserved.</div>
-         </footer>
       </main>
     </>
   );

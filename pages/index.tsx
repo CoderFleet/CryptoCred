@@ -65,7 +65,11 @@ const Home: React.FC = () => {
           <div className="text-2xl font-bold tracking-tight bg-gradient-to-r from-[#FFD700] via-[#FFB800] to-[#FFEF8E] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(255,215,0,0.22)]">CryptoCred</div>
           <div className="space-x-6 flex items-center">
              <a href="/features" className="text-white font-medium hover:underline">Features</a>
-             <a href="#roles" className="text-white font-medium hover:underline">How It Works</a>
+             <a href="#how-it-works" className="text-white font-medium hover:underline" onClick={e => {
+               e.preventDefault();
+               const el = document.getElementById('how-it-works');
+               if (el) el.scrollIntoView({ behavior: 'smooth' });
+             }}>How It Works</a>
              <a href="/contact" className="text-white font-medium hover:underline">Contact</a>
              <a href="/sign-in" className="text-white font-medium hover:underline">Sign In</a>
            </div>
@@ -108,7 +112,7 @@ const Home: React.FC = () => {
 
         {/* How It Works Section */}
         <section className="flex flex-col items-center justify-center px-4 py-20">
-  <h2 className="text-3xl md:text-4xl font-bold mb-16 bg-gradient-to-r from-[#FFD700] via-[#FFB800] to-[#FFEF8E] text-transparent bg-clip-text drop-shadow-[0_0_12px_rgba(255,215,0,0.24)]">How It Works</h2>
+  <h2 id="how-it-works" className="text-3xl md:text-4xl font-bold mb-16 bg-gradient-to-r from-[#FFD700] via-[#FFB800] to-[#FFEF8E] text-transparent bg-clip-text drop-shadow-[0_0_12px_rgba(255,215,0,0.24)]">How It Works</h2>
   <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto relative">
     {/* Timeline connector */}
     <div className="hidden md:block absolute top-1/2 left-0 right-0 h-2 z-0" style={{transform: 'translateY(-50%)'}}>

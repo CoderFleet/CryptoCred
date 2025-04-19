@@ -56,8 +56,8 @@ export default function RegisterPage() {
     <AuthLayout>
 
       <Tabs defaultValue="email" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-6">
-          <TabsTrigger value="email">Email</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 mb-6 bg-gray-200/60 backdrop-blur border border-gray-300/40 rounded-xl shadow-sm">
+          <TabsTrigger className="data-[state=active]:bg-white/60 data-[state=active]:font-semibold rounded-xl transition-all" value="email">Email</TabsTrigger>
           <TabsTrigger value="wallet">Wallet</TabsTrigger>
         </TabsList>
         <TabsContent value="email">
@@ -100,7 +100,7 @@ export default function RegisterPage() {
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full" variant="gradient" disabled={isLoading}>
               {isLoading ? 'Signing up...' : 'Sign Up'}
             </Button>
           </form>
@@ -124,7 +124,8 @@ export default function RegisterPage() {
             )}
             <Button 
               onClick={handleWalletConnect} 
-              className="w-full gap-2"
+              className="w-full gap-2" 
+              variant="gradient"
               disabled={isLoading}
             >
               <Wallet className="w-4 h-4" />
@@ -135,9 +136,9 @@ export default function RegisterPage() {
       </Tabs>
       <div className="mt-6">
         <Separator className="my-4" />
-        <p className="text-center text-sm text-muted-foreground">
+        <p className="text-center text-sm text-white dark:text-white">
           Already have an account?{" "}
-          <Link href="/sign-in" className="text-primary hover:underline">
+          <Link href="/sign-in" className="bg-gradient-to-r from-[#A7C7E7] via-[#B9F6CA] to-white bg-clip-text text-transparent font-semibold hover:underline dark:from-white dark:via-[#A7C7E7] dark:to-[#B9F6CA]">
             Sign in
           </Link>
         </p>

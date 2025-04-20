@@ -94,7 +94,11 @@ This system ensures:
 
 ## 📽️ Demo & Presentation
 
-- **Video Demo**: [Link to public demo video]  
+- **Video Demo**: 
+
+https://github.com/user-attachments/assets/07a17c5a-478b-4897-a730-ae90e838f828
+
+
 - **Presentation**: [Link to public presentation deck]
 
 ---

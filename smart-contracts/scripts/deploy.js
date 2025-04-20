@@ -1,9 +1,12 @@
-require("dotenv").config();
-const hre = require("hardhat");
+import { config } from "dotenv";
+import { ethers } from "hardhat";
+
+// Load environment variables from .env file
+config();
 
 async function main() {
   // Compile and get the contract factory
-  const CertificateIssuer = await hre.ethers.getContractFactory("CertificateIssuer");
+  const CertificateIssuer = await ethers.getContractFactory("CertificateIssuer");
 
   // Deploy the contract
   const certificateIssuer = await CertificateIssuer.deploy();

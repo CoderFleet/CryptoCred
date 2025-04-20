@@ -96,12 +96,8 @@ This system ensures:
 
 - **Video Demo**: 
 
-https://github.com/user-attachments/assets/07a17c5a-478b-4897-a730-ae90e838f828
+https://github.com/user-attachments/assets/cf094126-7c92-4ca2-96a9-a9aacab64e47
 
-https://github.com/user-attachments/assets/7c3ad642-d3d2-4569-96ac-66c7aaa09af4
-
-
-https://github.com/user-attachments/assets/47649969-4d8c-4fa3-9104-d7221c972238
 
 
 

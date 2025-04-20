@@ -3,7 +3,20 @@
 **A blockchain-based academic certificate storage and verification platform**  
 No more fakes. No more middlemen. Just trustless, verifiable credentials.
 
-![Banner](https://dummyimage.com/1000x300/1f1f1f/ffffff&text=CryptoCred+%F0%9F%9B%A1%EF%B8%8F+Academic+Cert+on+Chain)
+![Built at Hack36](https://postimage.me/images/2025/04/19/built-at-hack36.png)
+
+---
+
+## 🧠 Team Info
+
+**Team Name**: npm -D coders 
+**Track**: Defending the Digital Frontier, Fintech and Blockchain
+
+### 👥 Team Members
+- Rudransh Pratap Singh
+- Shreeya Srivastava
+- Gaurav Mishra
+- Devansh Jain
 
 ---
 
@@ -19,39 +32,50 @@ All this happens securely on-chain, powered by NFTs and IPFS magic. ✨
 
 ---
 
+## 🎯 Problem Statement & Importance
+
+Academic fraud and fake degrees are a massive problem worldwide. Recruiters and institutions waste valuable resources verifying credentials.  
+CryptoCred eliminates these issues by creating a trustless, immutable, and decentralized system for certificate issuance and verification.
+
+This system ensures:
+
+- ✅ Authenticity of documents
+- 🔒 Tamper-proof records
+- 🌐 Instant and permissionless verification
+
+---
+
 ## ⚙️ Tech Stack
 
-| Layer        | Tech                                 |
-|--------------|--------------------------------------|
-| Frontend     | React (Vite), TailwindCSS, ShadCN UI |
-| Wallet       | Wagmi + RainbowKit                   |
-| Animations   | Framer Motion                        |
-| Backend      | Node.js, Express                     |
-| Blockchain   | Solidity, Hardhat, Polygon Mumbai    |
-| Smart Contract | ERC-721 (Custom) + OpenZeppelin    |
-| Storage      | NFT.storage (IPFS)                   |
-| Auth (opt)   | Firebase or Supabase (email+wallet)  |
-| Hashing      | SHA-256 (Node & Browser Crypto API)  |
+| Layer         | Tech Stack                                                                 |
+|---------------|-----------------------------------------------------------------------------|
+| Frontend      | Next.js 15, React 19, TailwindCSS 4, ShadCN UI, clsx, tailwind-merge       |
+| Wallet        | wagmi v2 + RainbowKit                                                      |
+| Blockchain    | Solidity (ERC-721), Hardhat, viem, ethers v6, Polygon Mumbai               |
+| Animations    | Framer Motion,                                            |
+| UI Icons      | Lucide React                                                               |
+| Backend       | Node.js, Express, Mongoose, Formidable                                     |
+| Storage       | Pinata, form-data                                              |
+| Auth (Optional)| MongoDB                                      |
+| Hashing       | SHA-256 (Browser + Node.js Crypto APIs)                                    |
+| Dev Tools     | TypeScript, Eslint, dotenv                                                 |
 
 ---
 
 ## 🧭 User Flows
 
 ### 👨‍🎓 Student
-
 - Connect Wallet
 - Upload PDF Certificate
 - Backend hashes file, uploads to IPFS, stores hash on-chain
 - View and share verifiable public profile
 
 ### 🏫 Institution
-
 - Register (pre-approved or admin-set)
 - Upload student batch or individual certs
 - Sign and issue via smart contract
 
 ### 🧑‍💼 Recruiter
-
 - Visit student profile link
 - View uploaded certificates
 - Verify hash + IPFS integrity via on-chain data
@@ -66,20 +90,13 @@ All this happens securely on-chain, powered by NFTs and IPFS magic. ✨
 4. **Verification** – Recruiters download cert, hash it, and compare with on-chain hash.  
    ✅ Match = legit  
    ❌ Mismatch = tampered
+---
+
+## 📽️ Demo & Presentation
+
+- **Video Demo**: [Link to public demo video]  
+- **Presentation**: [Link to public presentation deck]
 
 ---
 
-## 📦 Smart Contract Sample
-
-```solidity
-struct Certificate {
-  string ipfsHash;
-  string certHash;
-  uint timestamp;
-}
-
-mapping(address => Certificate[]) public userCerts;
-
-function issueCertificate(address user, string memory ipfsHash, string memory certHash) public onlyInstitute {
-  userCerts[user].push(Certificate(ipfsHash, certHash, block.timestamp));
-}
+> “Code speaks louder than certificates... but why not both?” 😎

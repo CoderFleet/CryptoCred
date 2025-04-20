@@ -1,14 +1,22 @@
+// pages/api/certificate.js
 import express from 'express';
-import { hashFile } from '../utils/hash.js';
-import { uploadToIPFS } from '../utils/ipfs.js';
-import contract from '../utils/contract.js';
+import { hashFile } from '../../utils/hash.js';
+import { uploadToIPFS } from '../../utils/ipfs.js';
+import contract from '../../utils/contract.js';
 import formidable from 'formidable';
-import {ethers} from 'ethers';
-const router = express.Router();
+import { createRouter } from 'next-connect';
 
-// In your router code
-router.post('/', async (req, res) => {
-  const form = formidable();
+// This config is necessary for Next.js to handle form data properly
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+const router = createRouter();
+
+router.post(async (req, res) => {
+  const form = new formidable.IncomingForm();
 
   form.parse(req, async (err, fields, files) => {
     if (err) {
@@ -29,22 +37,19 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Missing userAddress or certificateFile' });
     }
 
-    const filePath = certificateFile.filepath;
+    const filePath = certificateFile.filepath; // ✅ full path to file on disk
 
     try {
       console.log('Hashing file...');
-      const certHash = await hashFile(filePath);
+      const certHash = await hashFile(filePath);  // ✅ pass path
       console.log('File hashed:', certHash);
 
       console.log('Uploading to IPFS...');
-      const ipfsHash = await uploadToIPFS(filePath);
+      const ipfsHash = await uploadToIPFS(filePath);  // ✅ pass path
       console.log('IPFS upload successful, IPFS Hash:', ipfsHash);
 
-      // Ensure the address is a proper checksum address without ENS resolution
-      const formattedAddress = ethers.getAddress(userAddress);
-      
       console.log('Issuing certificate...');
-      const tx = await contract.issueCertificate(formattedAddress, ipfsHash, certHash);
+      const tx = await contract.issueCertificate(userAddress, ipfsHash, certHash);
       console.log('Transaction sent, waiting for confirmation...');
       await tx.wait();
       console.log('Transaction confirmed with hash:', tx.hash);
@@ -52,7 +57,7 @@ router.post('/', async (req, res) => {
       res.status(200).json({
         message: 'Certificate issued successfully!',
         contractAddress: contract.address,
-        userAddress: formattedAddress,
+        userAddress,
         transactionHash: tx.hash,
         ipfsHash,
         certHash,
@@ -68,4 +73,4 @@ router.post('/', async (req, res) => {
   });
 });
 
-export default router;
+export default router.handler();

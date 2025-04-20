@@ -1,20 +1,28 @@
 {
-  "name": "cryptocred",
+  "name": "crypto-cred",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@rainbow-me/rainbowkit": "^2.2.4",
-    "@tanstack/react-query": "^5.74.4",
+    "@pinata/sdk": "^2.1.0",
+    "@radix-ui/react-label": "^2.1.4",
+    "@shadcn/ui": "^0.0.4",
+    "@radix-ui/react-separator": "^1.1.4",
+    "@radix-ui/react-slot": "^1.2.0",
+    "@radix-ui/react-tabs": "^1.1.7",
+    "@shadcn/ui": "latest",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "crypto": "^1.0.1",
     "dotenv": "^16.5.0",
     "ethers": "^6.13.5",
+    "express": "^5.1.0",
+    "fetch-blob": "^4.0.0",
     "form-data": "^4.0.2",
     "formidable": "^3.5.3",
     "framer-motion": "^12.7.4",
@@ -24,19 +32,15 @@
     "react-dom": "^19.0.0",
     "shadcn-ui": "^0.9.5",
     "tailwind-merge": "^3.2.0",
-    "tw-animate-css": "^1.2.5",
-    "viem": "^2.27.2",
-    "wagmi": "^2.14.16"
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.1",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@types/node": "22.14.1.17.30",
+    "@types/react": "19.1.2",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "5.8.3.8.3"
   }
 }

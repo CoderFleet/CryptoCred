@@ -94,8 +94,18 @@ This system ensures:
 
 ## 📽️ Demo & Presentation
 
-- **Video Demo**: [Link to public demo video]  
-- **Presentation**: https://docs.google.com/presentation/d/e/2PACX-1vSyGOqvM6ZMjRUHIJfDWsGO0iEojYQcvBgOpntOxx-c5HecirqWu2h_nvCQjZgns2xmdF_6A7pf-PHT/pub?start=false&loop=true&delayms=60000
+
+- **Video Demo**: 
+
+https://github.com/user-attachments/assets/cf094126-7c92-4ca2-96a9-a9aacab64e47
+
+
+
+
+
+
+
+- **Presentation**: [[Link to public presentation deck]](https://docs.google.com/presentation/d/e/2PACX-1vSyGOqvM6ZMjRUHIJfDWsGO0iEojYQcvBgOpntOxx-c5HecirqWu2h_nvCQjZgns2xmdF_6A7pf-PHT/pub?start=false&loop=true&delayms=60000)
 
 ---
 

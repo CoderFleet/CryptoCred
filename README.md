@@ -17,6 +17,20 @@ No more fakes. No more middlemen. Just trustless, verifiable credentials.
 - Shreeya Srivastava
 - Gaurav Mishra
 - Devansh Jain
+![Built at Hack36](https://postimage.me/images/2025/04/19/built-at-hack36.png)
+
+---
+
+## 🧠 Team Info
+
+**Team Name**: npm -D coders 
+**Track**: Defending the Digital Frontier, Fintech and Blockchain
+
+### 👥 Team Members
+- Rudransh Pratap Singh
+- Shreeya Srivastava
+- Gaurav Mishra
+- Devansh Jain
 
 ---
 

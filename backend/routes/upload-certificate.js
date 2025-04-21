@@ -3,10 +3,10 @@ import { hashFile } from '../utils/hash.js';
 import { uploadToIPFS } from '../utils/ipfs.js';
 import contract from '../utils/contract.js';
 import formidable from 'formidable';
-import {ethers} from 'ethers';
+import { ethers } from 'ethers';
+
 const router = express.Router();
 
-// In your router code
 router.post('/', async (req, res) => {
   const form = formidable();
 
@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
       ? fields.userAddress[0]
       : fields.userAddress;
 
-    const certificateFile = files.certificateFile?.[0]; // use [0] if it's an array
+    const certificateFile = files.certificateFile?.[0];
 
     console.log('[User Address]', userAddress); 
     console.log('[Certificate File]', certificateFile);
@@ -40,11 +40,17 @@ router.post('/', async (req, res) => {
       const ipfsHash = await uploadToIPFS(filePath);
       console.log('IPFS upload successful, IPFS Hash:', ipfsHash);
 
-      // Ensure the address is a proper checksum address without ENS resolution
-      const formattedAddress = ethers.getAddress(userAddress);
-      
+      const formattedAddress = ethers.utils.getAddress(userAddress);
+
       console.log('Issuing certificate...');
-      const tx = await contract.issueCertificate(formattedAddress, ipfsHash, certHash);
+
+      // 💡 Gas fee override added here
+      const tx = await contract.issueCertificate(formattedAddress, ipfsHash, certHash, {
+        maxPriorityFeePerGas: ethers.utils.parseUnits("26", "gwei"), // Tip to miner
+        maxFeePerGas: ethers.utils.parseUnits("50", "gwei"),         // Max total you're willing to pay
+        
+      });
+
       console.log('Transaction sent, waiting for confirmation...');
       await tx.wait();
       console.log('Transaction confirmed with hash:', tx.hash);

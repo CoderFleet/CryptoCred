@@ -1,34 +1,35 @@
-import "dotenv/config";
-import express from "express";
-import uploadRoute from "./routes/upload-certificate.js";
-import getCertsRoute from "./routes/get-certificate.js";
-import authRoutes from "./routes/auth.js";
-<<<<<<< HEAD
-import mongoose from "mongoose";
-=======
->>>>>>> origin/shreeya
-const app = express();
-import dotenv from 'dotenv';
-dotenv.config();
-const port = process.env.PORT || 5000;
+// server.js
+import 'dotenv/config'; // Loads environment variables
+import express from 'express';
+import mongoose from 'mongoose';
 import cors from 'cors';
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
+import authRoutes from './routes/auth.js';
+import uploadRoute from './routes/upload-certificate.js';
+import getCertsRoute from './routes/get-certificate.js';
+import verifyRoute from './routes/verify-certificate.js';
+const app = express();
+const port = process.env.PORT || 5000;
+
+// Middleware
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-mongoose.connect('mongodb+srv://tosylfluoride:rps123@cluster0.k5syn.mongodb.net/cryptocred').then(() => console.log('DB connected'));
 
-mongoose.connect('mongodb+srv://tosylfluoride:rps123@cluster0.k5syn.mongodb.net/cryptocred').then(() => console.log('DB connected'));
+// MongoDB Connection
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('✅ MongoDB connected'))
+.catch(err => console.error('❌ MongoDB connection error:', err));
 
 // Routes
 app.use('/auth', authRoutes);
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/shreeya
 app.use('/upload-certificate', uploadRoute);
 app.use('/get-certificates', getCertsRoute);
-
+app.use('/verify-certificate', verifyRoute);
+// Start Server
 app.listen(port, () => {
-  console.log(`✅ Server is running on port ${port}`);
+  console.log(`🚀 Server is running on http://localhost:${port}`);
 });

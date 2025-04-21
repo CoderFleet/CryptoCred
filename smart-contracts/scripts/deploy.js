@@ -1,5 +1,5 @@
-import { config } from "dotenv";
-import { ethers } from "hardhat";
+const config=require("dotenv").config;
+const { ethers } = require("hardhat");
 
 // Load environment variables from .env file
 config();

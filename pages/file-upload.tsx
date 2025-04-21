@@ -1,7 +1,18 @@
-import React, { useState } from "react";
-import { ShieldCheck, Upload, Menu, AlertCircle, CheckCircle } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ShieldCheck, Upload, Menu, AlertCircle, CheckCircle, LogOut } from "lucide-react";
+import Link from 'next/link';
+import authService from '../services/auth';
+import { useRouter } from 'next/router';
 
 function Header() {
+  const router = useRouter();
+  
+  const handleLogout = () => {
+    authService.logout();
+    // Redirect to login page or home page after logout
+    router.push('/sign-in');
+  };
+
   return (
     <header className="w-full bg-gradient-to-r from-[#0a0a0a] via-[#181818] to-[#0a0a0a] shadow rounded-b-3xl mb-8 border-b border-[#A7C7E7]/30 backdrop-blur">
       <div className="container mx-auto px-4">
@@ -17,28 +28,34 @@ function Header() {
               </span>
             </span>
           </div>
-          <nav className="hidden md:block">
+          <nav className="hidden md:flex items-center">
             <ul className="flex space-x-8">
               <li>
-                <a href="#" className="text-[#A7C7E7] hover:text-[#B9F6CA] font-medium">Home</a>
-              </li>
-              <li>
                 <a href="#" className="text-[#B9F6CA] font-medium border-b-2 border-[#B9F6CA] pb-1">Upload</a>
-              </li>
-              <li>
-                <a href="#" className="text-[#A7C7E7] hover:text-[#B9F6CA] font-medium">My Files</a>
-              </li>
-              <li>
-                <a href="#" className="text-[#A7C7E7] hover:text-[#B9F6CA] font-medium">Settings</a>
               </li>
               <li>
                 <a href="/contact" className="text-[#A7C7E7] hover:text-[#B9F6CA] font-medium">Contact</a>
               </li>
             </ul>
+            <button 
+              onClick={handleLogout}
+              className="ml-8 flex items-center gap-2 px-4 py-2 rounded-lg bg-transparent border border-[#A7C7E7] text-[#A7C7E7] hover:bg-[#A7C7E7]/10 transition-all"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Logout</span>
+            </button>
           </nav>
-          <button className="md:hidden p-2 rounded-full hover:bg-[#A7C7E7]/10 transition">
-            <Menu className="h-7 w-7 text-[#A7C7E7]" />
-          </button>
+          <div className="md:hidden flex items-center gap-4">
+            <button 
+              onClick={handleLogout}
+              className="flex items-center justify-center rounded-full p-2 bg-transparent border border-[#A7C7E7] text-[#A7C7E7] hover:bg-[#A7C7E7]/10 transition-all"
+            >
+              <LogOut className="w-5 h-5" />
+            </button>
+            <button className="p-2 rounded-full hover:bg-[#A7C7E7]/10 transition">
+              <Menu className="h-7 w-7 text-[#A7C7E7]" />
+            </button>
+          </div>
         </div>
       </div>
     </header>
@@ -215,18 +232,57 @@ const FileUpload = ({ userAddress }) => {
 };
 
 const FileUploadPage = () => {
-  // In a real app, you would get this from context or state management
+  const router = useRouter();
   const [userAddress, setUserAddress] = useState("");
+  const [connecting, setConnecting] = useState(false);
+  const [error, setError] = useState("");
+  const [manualAddress, setManualAddress] = useState("");
+  const [showManualInput, setShowManualInput] = useState(false);
   
-  // Mock function to connect wallet
+  // Check if wallet is already connected on page load
+  useEffect(() => {
+    const savedAddress = localStorage.getItem('walletAddress');
+    if (savedAddress) {
+      setUserAddress(savedAddress);
+    }
+  }, []);
+
+  // Connect wallet using the auth service
   const connectWallet = async () => {
-    // This would normally interact with MetaMask or another wallet
+    setConnecting(true);
+    setError("");
+    
     try {
-      // Mock wallet connection
-      setUserAddress("0x2109DD9dccd080Da8fED417E5dc83b3D541F0fa0");
+      const result = await authService.connectWallet();
+      if (result && result.user) {
+        setUserAddress(result.user.walletAddress || localStorage.getItem('walletAddress'));
+      }
     } catch (error) {
       console.error("Failed to connect wallet:", error);
+      setError(error.message || "Failed to connect wallet. Please try again.");
+    } finally {
+      setConnecting(false);
     }
+  };
+  
+  // Handle manual address input
+  const handleManualAddressSubmit = (e) => {
+    e.preventDefault();
+    if (manualAddress.trim() && manualAddress.startsWith("0x") && manualAddress.length === 42) {
+      setUserAddress(manualAddress);
+      localStorage.setItem('walletAddress', manualAddress);
+      setShowManualInput(false);
+    } else {
+      setError("Please enter a valid Ethereum address (0x followed by 40 hexadecimal characters)");
+    }
+  };
+
+  // Disconnect wallet
+  const disconnectWallet = () => {
+    authService.logout();
+    setUserAddress("");
+    setShowManualInput(false);
+    setError("");
   };
 
   return (
@@ -240,19 +296,63 @@ const FileUploadPage = () => {
               <p className="text-[#A7C7E7]">Upload your files securely and easily.</p>
             </div>
             {!userAddress ? (
-              <button 
-                onClick={connectWallet}
-                className="px-4 py-2 bg-gradient-to-r from-[#A7C7E7] to-[#B9F6CA] text-black font-medium rounded-lg hover:opacity-90 transition-all"
-              >
-                Connect Wallet
-              </button>
+              <div className="flex gap-2">
+                <button 
+                  onClick={connectWallet}
+                  disabled={connecting}
+                  className="px-4 py-2 bg-gradient-to-r from-[#A7C7E7] to-[#B9F6CA] text-black font-medium rounded-lg hover:opacity-90 transition-all disabled:opacity-70"
+                >
+                  {connecting ? 'Connecting...' : 'Connect Wallet'}
+                </button>
+                <button 
+                  onClick={() => setShowManualInput(!showManualInput)}
+                  className="px-4 py-2 bg-transparent border border-[#A7C7E7] text-[#A7C7E7] rounded-lg hover:bg-[#A7C7E7]/10 transition-all"
+                >
+                  Enter Address
+                </button>
+              </div>
             ) : (
-              <div className="bg-black/40 px-4 py-2 rounded-lg border border-[#A7C7E7]/30">
-                <span className="text-[#A7C7E7] text-sm">Connected:</span>
-                <span className="text-white ml-2 font-mono">{userAddress}</span>
+              <div className="flex items-center gap-3">
+                <div className="bg-black/40 px-4 py-2 rounded-lg border border-[#A7C7E7]/30 flex items-center">
+                  <span className="text-[#A7C7E7] text-sm">Connected:</span>
+                  <span className="text-white ml-2 font-mono">{userAddress.substring(0, 6)}...{userAddress.substring(userAddress.length - 4)}</span>
+                </div>
+                <button 
+                  onClick={disconnectWallet}
+                  className="p-2 rounded-full bg-transparent border border-[#A7C7E7]/30 text-[#A7C7E7] hover:bg-[#A7C7E7]/10 transition-all"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
               </div>
             )}
           </div>
+          
+          {showManualInput && !userAddress && (
+            <div className="w-full bg-black/80 border border-[#A7C7E7] rounded-3xl p-6 mb-6 shadow-lg backdrop-blur-md">
+              <h3 className="text-white text-lg font-medium mb-4">Enter Wallet Address</h3>
+              <form onSubmit={handleManualAddressSubmit} className="flex gap-3">
+                <input 
+                  type="text" 
+                  value={manualAddress} 
+                  onChange={(e) => setManualAddress(e.target.value)}
+                  placeholder="0x..."
+                  className="flex-1 bg-black/60 border border-[#A7C7E7]/50 rounded-lg px-4 py-2 text-white placeholder-[#A7C7E7]/50 focus:outline-none focus:ring-2 focus:ring-[#B9F6CA]/30 focus:border-[#B9F6CA]"
+                />
+                <button 
+                  type="submit"
+                  className="px-4 py-2 bg-gradient-to-r from-[#A7C7E7] to-[#B9F6CA] text-black font-medium rounded-lg hover:opacity-90 transition-all"
+                >
+                  Submit
+                </button>
+              </form>
+              {error && (
+                <div className="mt-3 text-red-300 text-sm flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4" />
+                  {error}
+                </div>
+              )}
+            </div>
+          )}
           
           {userAddress ? (
             <FileUpload userAddress={userAddress} />
@@ -262,12 +362,26 @@ const FileUploadPage = () => {
                 <AlertCircle className="w-12 h-12 mb-4 text-[#A7C7E7] mx-auto" />
                 <h3 className="text-xl font-semibold text-white mb-2">Wallet Connection Required</h3>
                 <p className="text-[#A7C7E7] mb-4">Please connect your wallet to upload and verify certificates.</p>
-                <button 
-                  onClick={connectWallet}
-                  className="px-6 py-2 bg-gradient-to-r from-[#A7C7E7] to-[#B9F6CA] text-black font-medium rounded-lg hover:opacity-90 transition-all"
-                >
-                  Connect Wallet
-                </button>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <button 
+                    onClick={connectWallet}
+                    disabled={connecting}
+                    className="px-6 py-2 bg-gradient-to-r from-[#A7C7E7] to-[#B9F6CA] text-black font-medium rounded-lg hover:opacity-90 transition-all disabled:opacity-70"
+                  >
+                    {connecting ? 'Connecting...' : 'Connect Wallet'}
+                  </button>
+                  <button 
+                    onClick={() => setShowManualInput(true)}
+                    className="px-6 py-2 bg-transparent border border-[#A7C7E7] text-[#A7C7E7] rounded-lg hover:bg-[#A7C7E7]/10 transition-all"
+                  >
+                    Enter Address Manually
+                  </button>
+                </div>
+                {error && (
+                  <div className="mt-4 p-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-300 text-sm">
+                    {error}
+                  </div>
+                )}
               </div>
             </div>
           )}

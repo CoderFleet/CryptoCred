@@ -66,7 +66,7 @@ export default function RegisterPage() {
       
       // Redirect after successful wallet connection
       setTimeout(() => {
-        router.push('/dashboard');
+        router.push('/file-upload');
       }, 1000);
     } catch (err: any) {
       setError(err.message || 'Wallet connection failed. Please try again.');

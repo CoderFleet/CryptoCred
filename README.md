@@ -108,9 +108,15 @@ This system ensures:
 
 ## 📽️ Demo & Presentation
 
+
 - **Video Demo**: 
 
-https://github.com/user-attachments/assets/07a17c5a-478b-4897-a730-ae90e838f828
+https://github.com/user-attachments/assets/cf094126-7c92-4ca2-96a9-a9aacab64e47
+
+
+
+
+
 
 
 - **Presentation**: [[Link to public presentation deck]](https://docs.google.com/presentation/d/e/2PACX-1vSyGOqvM6ZMjRUHIJfDWsGO0iEojYQcvBgOpntOxx-c5HecirqWu2h_nvCQjZgns2xmdF_6A7pf-PHT/pub?start=false&loop=true&delayms=60000)
